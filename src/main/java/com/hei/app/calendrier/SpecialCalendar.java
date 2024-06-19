@@ -7,19 +7,19 @@ import lombok.Data;
 
 @Data
 public class SpecialCalendar {
-    private final int mois;
-    private List<Jour> jours = new ArrayList<>();
+    private final int month;
+    private List<Day> days = new ArrayList<>();
 
-    public SpecialCalendar(int mois, int annees, List<Integer> jourFerier) {
-        this.mois = mois;
-        for (int i = 1; i <= nombreJoursMois(mois, annees); i++) {
-            if (jourFerier.contains(i)) jours.add(new Jour(i, true));
-            else jours.add(new Jour(i, false));
+    public SpecialCalendar(int month, int years, List<Integer> holidays) {
+        this.month = month;
+        for (int i = 1; i <= numberDaysOfMonth(month, years); i++) {
+            if (holidays.contains(i)) days.add(new Day(i, true));
+            else days.add(new Day(i, false));
         }
     }
 
-    private static int nombreJoursMois(int mois, int annee) {
-        switch (mois) {
+    private static int numberDaysOfMonth(int month, int year) {
+        switch (month) {
             case 1:
             case 3:
             case 5:
@@ -34,17 +34,17 @@ public class SpecialCalendar {
             case 11:
                 return 30;
             case 2:
-                if (estBissextile(annee)) {
+                if (isLeapYear(year)) {
                     return 29;
                 } else {
                     return 28;
                 }
             default:
-                throw new IllegalArgumentException("Mois invalide : " + mois);
+                throw new IllegalArgumentException("Month not valid : " + month);
         }
     }
 
-    private static boolean estBissextile(int annee) {
-        return (annee % 4 == 0) && ((annee % 100 != 0) || (annee % 400 == 0));
+    private static boolean isLeapYear(int year) {
+        return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
     }
 }

@@ -1,6 +1,6 @@
 package com.hei.app.calendrier;
 
-public record Jour (
+public record Day (
     int value,
-    boolean isFerier
+    boolean isHoliday
 ) {}
