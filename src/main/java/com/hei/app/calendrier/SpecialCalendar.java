@@ -1,5 +1,6 @@
 package com.hei.app.calendrier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -7,7 +8,7 @@ import lombok.Data;
 @Data
 public class SpecialCalendar {
     private final int mois;
-    private static List<Jour> jours;
+    private List<Jour> jours = new ArrayList<>();
 
     public SpecialCalendar(int mois, int annees, List<Integer> jourFerier) {
         this.mois = mois;

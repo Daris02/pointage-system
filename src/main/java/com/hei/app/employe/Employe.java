@@ -16,7 +16,7 @@ public class Employe {
     private Instant finContrat;
     private Categorie categorie;
 
-    public double salaireNet() {
+    public double getSalaireNet() {
         double salaireBrute = categorie.getSalaireCorrespond();
         return salaireBrute * 0.8;
     }
