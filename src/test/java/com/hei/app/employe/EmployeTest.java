@@ -20,6 +20,6 @@ public class EmployeTest {
             gardien
         );
 
-        assertEquals(80_000, bob.getNetSalary());
+        assertEquals(80_000, bob.getSalary().getNet());
     }
 }
