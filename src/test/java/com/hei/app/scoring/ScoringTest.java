@@ -1,4 +1,4 @@
-package com.hei.app.pointage;
+package com.hei.app.scoring;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,7 +12,7 @@ import com.hei.app.employe.Category;
 import com.hei.app.employe.CategoryType;
 import com.hei.app.employe.Employee;
 
-public class PointageTest {
+public class ScoringTest {
     @Test
     void simple_test() {
         var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));

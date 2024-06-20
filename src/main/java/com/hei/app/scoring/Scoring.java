@@ -1,4 +1,4 @@
-package com.hei.app.pointage;
+package com.hei.app.scoring;
 
 import java.util.List;
 

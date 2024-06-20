@@ -1,4 +1,4 @@
-package com.hei.app.pointage;
+package com.hei.app.scoring;
 
 public record Attendance (
     int day,
