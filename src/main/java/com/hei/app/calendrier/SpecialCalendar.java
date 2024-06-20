@@ -13,8 +13,9 @@ public class SpecialCalendar {
     public SpecialCalendar(int month, int years, List<Integer> holidays) {
         this.month = month;
         for (int i = 1; i <= numberDaysOfMonth(month, years); i++) {
-            if (holidays.contains(i)) days.add(new Day(i, true));
-            else days.add(new Day(i, false));
+            String dayName = String.join("-", (CharSequence) List.of(years, month, i));
+            if (holidays.contains(i)) days.add(new Day(i, dayName,true));
+            else days.add(new Day(i, dayName,false));
         }
     }
 
