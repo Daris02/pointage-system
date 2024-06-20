@@ -30,4 +30,22 @@ public class Employee {
     public Salary defaultSalary() {
         return new Salary(category.getSalaryMatche());
     }
+
+    public double addHourSupp(int hours) {
+        if (hours >= 8) salary = new Salary(salary.getBrute() * 1.3);
+        if (hours >= 12) salary = new Salary(salary.getBrute() * 1.5);
+        return 0.0;
+    }
+    
+    public void addNightHourSupp(int hours) {
+        this.salary = new Salary(salary.getBrute() * 1.3);
+    }
+
+    public void addSundaySupp() {
+        this.salary = new Salary(salary.getBrute() * 1.4);
+    }
+
+    public void addHolidaySupp() {
+        this.salary = new Salary(salary.getBrute() * 1.5);
+    }
 }
