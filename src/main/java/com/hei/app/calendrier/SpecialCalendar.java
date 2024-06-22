@@ -1,7 +1,10 @@
 package com.hei.app.calendrier;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import lombok.Data;
 
@@ -13,7 +16,7 @@ public class SpecialCalendar {
     public SpecialCalendar(int month, int years, List<Integer> holidays) {
         this.month = month;
         for (int i = 1; i <= numberDaysOfMonth(month, years); i++) {
-            String dayName = String.join("-", (CharSequence) List.of(years, month, i));
+            String dayName = getDayName(years, month, i);
             if (holidays.contains(i)) days.add(new Day(i, dayName,true));
             else days.add(new Day(i, dayName,false));
         }
@@ -35,11 +38,8 @@ public class SpecialCalendar {
             case 11:
                 return 30;
             case 2:
-                if (isLeapYear(year)) {
-                    return 29;
-                } else {
-                    return 28;
-                }
+                if (isLeapYear(year)) return 29;
+                return 28;
             default:
                 throw new IllegalArgumentException("Month not valid : " + month);
         }
@@ -47,5 +47,9 @@ public class SpecialCalendar {
 
     private static boolean isLeapYear(int year) {
         return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
+    }
+
+    private static String getDayName(int year, int month, int day) {
+        return LocalDate.of(year, month, day).getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
     }
 }
