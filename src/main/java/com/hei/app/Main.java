@@ -21,13 +21,13 @@ public class Main {
     public static void main(String[] args) {
         SpecialCalendar calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
 
-        Category gardien = new Category(CategoryType.guardian, 24, 100000);
+        Category gardien = new Category(CategoryType.guardian, 56, 110_000);
 
         Employee rakoto = new Employee(
-            "Rakoto", "Be", "1234",
-            Instant.parse("2001-02-02T00:00:00Z"),
-            Instant.parse("2020-07-12T00:00:00Z"),
-            Instant.parse("2030-07-12T00:00:00Z"),
+            "Rakoto", "Name", "1234",
+            "2001-02-02",
+            "2020-07-12",
+            "2030-07-12",
             gardien
         );
 
@@ -35,17 +35,17 @@ public class Main {
             rakoto,
             calandar_juin,
             List.of(
-                new Attendance(17, "06:00-18:00"),
-                new Attendance(18, "06:00-18:00"),
-                new Attendance(19, "06:00-18:00"),
-                new Attendance(20, "06:00-18:00"),
-                new Attendance(21, "06:00-18:00"),
-                new Attendance(22, "06:00-18:00"),
-                new Attendance(23, "06:00-18:00")
+                new Attendance(17, "07:00-17:00"),
+                new Attendance(18, "07:00-17:00"),
+                new Attendance(19, "07:00-17:00"),
+                new Attendance(20, "07:00-17:00"),
+                new Attendance(21, "07:00-17:00"),
+                new Attendance(22, "07:00-17:00"),
+                new Attendance(23, "07:00-17:00")
             )
         );
 
-        System.out.println(scoring_rakoto.calculAfterScoring().getSalary().getNet());
+        System.out.println(scoring_rakoto.calculAfterScoring().getSalary());
     }
     
     // public static void main(String[] args) {
