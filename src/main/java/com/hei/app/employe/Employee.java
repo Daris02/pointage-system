@@ -15,8 +15,8 @@ public class Employee {
     private Salary salary;
     private Category category;
 
-    public Employee(String firstName, String lastName, String registrationNumber, Instant birthDate, Instant hireDate,
-            Instant endContrat, Category category) {
+    public Employee(String firstName, String lastName, String registrationNumber, 
+            Instant birthDate, Instant hireDate, Instant endContrat, Category category) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.registrationNumber = registrationNumber;
@@ -24,28 +24,25 @@ public class Employee {
         this.hireDate = hireDate;
         this.endContrat = endContrat;
         this.category = category;
-        this.salary  = defaultSalary();
+        this.salary  = new Salary(category.getSalaryMatche());
     }
 
-    public Salary defaultSalary() {
-        return new Salary(category.getSalaryMatche());
-    }
-
-    public double addHourSupp(int hours) {
-        if (hours >= 8) salary = new Salary(salary.getBrute() * 1.3);
-        if (hours >= 12) salary = new Salary(salary.getBrute() * 1.5);
-        return 0.0;
+    public void addHourSupp(int hours) {
+        double newSalary = 0;
+        if (hours <= 8 && hours < 12) newSalary = salary.getBrute() * 1.3;
+        if (hours >= 12) newSalary = salary.getBrute() * 1.5;
+        salary.setBrute(salary.getBrute() + newSalary);
     }
     
     public void addNightHourSupp(int hours) {
-        this.salary = new Salary(salary.getBrute() * 1.3);
+        salary.setBrute(salary.getBrute() * 1.3);
     }
 
-    public void addSundaySupp() {
-        this.salary = new Salary(salary.getBrute() * 1.4);
+    public void addSundaySupp(int numberOfDay) {
+        if (numberOfDay > 0) salary.setBrute(salary.getBrute() * 1.4 * numberOfDay);
     }
 
-    public void addHolidaySupp() {
-        this.salary = new Salary(salary.getBrute() * 1.5);
+    public void addHolidaySupp(int numberOfDay) {
+        if (numberOfDay > 0) salary.setBrute(salary.getBrute() * 1.5 * numberOfDay);
     }
 }

@@ -4,11 +4,13 @@ import lombok.Data;
 
 @Data
 public class Salary {
-    private double net;
     private double brute;
 
     public Salary(double brute) {
         this.brute = brute;
-        this.net = brute * 0.8;
+    }
+
+    public double getNet() {
+        return brute * 0.8;
     }
 }
