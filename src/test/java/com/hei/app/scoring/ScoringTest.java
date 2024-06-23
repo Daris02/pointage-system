@@ -1,6 +1,6 @@
 package com.hei.app.scoring;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Instant;
 import java.util.List;
@@ -28,19 +28,20 @@ public class ScoringTest {
         );
 
         var scoring_rakoto = new Scoring(
+            rakoto,
             calandar_juin,
             List.of(
-                new Attendance(16, "06:00-18:00"),
-                new Attendance(17, "06:00-18:00"),
-                new Attendance(18, "06:00-18:00"),
-                new Attendance(19, "06:00-18:00"),
-                new Attendance(20, "06:00-18:00"),
-                new Attendance(21, "06:00-18:00"),
-                new Attendance(22, "06:00-18:00")
-            ),
-            rakoto
+                new Attendance(17, "08:00-17:00"),
+                new Attendance(18, "08:00-17:00"),
+                new Attendance(19, "08:00-17:00"),
+                new Attendance(20, "08:00-17:00"),
+                new Attendance(21, "08:00-17:00"),
+                new Attendance(22, "08:00-17:00"),
+                new Attendance(23, "08:00-17:00")
+                // new Attendance(24, "08:00-17:00")
+            )
         );
 
-        assertTrue(true);
+        assertEquals(390_000, scoring_rakoto.calculAfterScoring().getSalary().getNet());
     }
 }
