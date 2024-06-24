@@ -22,14 +22,17 @@ public class Attendance {
 
     public int getWorkHours() {
         Duration duration = Duration.between(begin, end);
-        long durationInHours = duration.toHours();
-        return (int) durationInHours;
+        int durationInHours = (int) duration.toHours();
+        return durationInHours;
     }
 
     public int getNightWorkHours() {
-        Duration duration = Duration.between(begin, end);
-        long durationInHours = duration.toHours();
-        return (int) durationInHours;
+        if (containsNightHours()) {
+            Duration duration = Duration.between(end, LocalTime.of(6, 0));
+            int durationInHours = (int) duration.toHours();
+            return durationInHours;
+        }
+        return 0;
     }
 
     public boolean containsNightHours() {
