@@ -36,15 +36,17 @@ public class Scoring {
                     int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/7;
                     workHours += workHourInDay;
                     if (workHourInDay > defaultWorkHourPerDay) hoursSupp += (workHourInDay - defaultWorkHourPerDay);
-                    if (day.isHoliday()) holidaysSupp++;
-                    if (day.name() == "Sunday" && employee.getCategory().getName() != CategoryType.guardian)
-                        sundaySupp++;
                     if (attendance.containsNightHours()) {
+                        hoursSupp += attendance.getNightWorkHours();
                         nightHoursSupp += attendance.getNightWorkHours();
                     }
+                    if (day.isHoliday()) holidaysSupp += workHourInDay;
+                    if (day.name() == "Sunday" && employee.getCategory().getName() != CategoryType.guardian)
+                        sundaySupp += workHourInDay;
                 }
             }
         }
+        if (hoursSupp > 20) hoursSupp = 20;
         employee.addOverTime(hoursSupp);
         employee.addSundaySupp(sundaySupp);
         employee.addHolidaySupp(holidaysSupp);
