@@ -1,5 +1,6 @@
 package com.hei.app.scoring;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hei.app.calendrier.Day;
@@ -9,12 +10,14 @@ import com.hei.app.employe.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Scoring {
     private Employee employee;
-    private final SpecialCalendar calendar;
+    private SpecialCalendar calendar;
     private List<Attendance> attendances;
     private int workHours = 0;
     private int hoursSupp = 0;
@@ -28,24 +31,50 @@ public class Scoring {
         this.attendances = attendances;
     }
 
-    public Employee calculAfterScoring() {
+    public void calculAfterScoring() {
+        List<List<Day>> month = new ArrayList<>();
+        List<Day> week = new ArrayList<>();
         for (Day day : calendar.getDays()) {
+            if (week.size() <= 7) week.add(day);
+            else {
+                month.add(week);
+                week = new ArrayList<>();
+                week.add(day);
+            }
+        }
+        for (List<Day> weekOfMonth : month) {
+            employee = calculAfterScoringInWeek(weekOfMonth);
+        }
+    }
+
+    private Employee calculAfterScoringInWeek(List<Day> calendar) {
+        int workHoursInWeek = 0;
+        int hoursSuppInWeek = 0;
+        int holidaysSuppInWeek = 0;
+        int nightHoursSuppInWeek = 0;
+        int sundaySuppInWeek = 0;
+        for (Day day : calendar) {
             for (Attendance attendance : attendances) {
                 if (day.value() == attendance.getDay()) {
                     int workHourInDay = attendance.getWorkHours();
                     int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/7;
-                    workHours += workHourInDay;
-                    if (workHourInDay > defaultWorkHourPerDay) hoursSupp += (workHourInDay - defaultWorkHourPerDay);
+                    workHoursInWeek += workHourInDay;
+                    if (workHourInDay > defaultWorkHourPerDay) hoursSuppInWeek += (workHourInDay - defaultWorkHourPerDay);
                     if (attendance.containsNightHours()) {
-                        hoursSupp += attendance.getNightWorkHours();
-                        nightHoursSupp += attendance.getNightWorkHours();
+                        hoursSuppInWeek += attendance.getNightWorkHours();
+                        nightHoursSuppInWeek += attendance.getNightWorkHours();
                     }
-                    if (day.isHoliday()) holidaysSupp += workHourInDay;
+                    if (day.isHoliday()) holidaysSuppInWeek += workHourInDay;
                     if (day.name() == "Sunday" && employee.getCategory().getName() != CategoryType.guardian)
-                        sundaySupp += workHourInDay;
+                        sundaySuppInWeek += workHourInDay;
                 }
             }
         }
+        setWorkHours(workHours += workHoursInWeek);
+        setHoursSupp(hoursSupp += hoursSuppInWeek);;
+        setHolidaysSupp(holidaysSupp += holidaysSuppInWeek);;
+        setNightHoursSupp(nightHoursSupp += nightHoursSuppInWeek);;
+        setSundaySupp(sundaySupp += sundaySuppInWeek);
         if (hoursSupp > 20) hoursSupp = 20;
         employee.addOverTime(hoursSupp);
         employee.addSundaySupp(sundaySupp);
