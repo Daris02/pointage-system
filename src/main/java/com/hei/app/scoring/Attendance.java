@@ -23,19 +23,21 @@ public class Attendance {
     public int getWorkHours() {
         Duration duration = Duration.between(begin, end);
         int durationInHours = (int) duration.toHours();
-        return durationInHours;
+        return Math.abs(durationInHours);
     }
 
     public int getNightWorkHours() {
         if (containsNightHours()) {
-            Duration duration = Duration.between(end, LocalTime.of(6, 0));
-            int durationInHours = (int) duration.toHours();
-            return durationInHours;
+            int nightHours = 0;
+            nightHours += Duration.between(LocalTime.of(18, 0), begin).toHoursPart();
+            nightHours += Duration.between(begin, LocalTime.of(6, 0)).toHoursPart();
+            return Math.abs(nightHours);
         }
         return 0;
     }
 
     public boolean containsNightHours() {
-        return begin.isAfter(LocalTime.of(18, 0)) || end.isBefore(LocalTime.of(6, 0));
+        return begin.isAfter(LocalTime.of(18, 0)) || begin.getHour() == 18 ||
+            end.isBefore(LocalTime.of(6, 0)) || end.getHour() == 6;
     }
 }
