@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 public class EmployeTest {
     
     @Test
-    void salaire_net_exacte() {
-        var gardien = new Category(CategoryType.guardian, 24, 100_000);
+    void correct_net_salary() {
+        var gardien = new Category(CategoryType.normal, 40, 100_000);
 
-        var bob = new Employee(
-            "Bob", "Doe", "5678",
+        var john = new Employee(
+            "John", "Doe", "5678",
             "2001-02-02",
             "2020-07-12",
             "2030-07-12",
             gardien
         );
 
-        assertEquals(80_000, bob.getSalary().getNet());
+        assertEquals(80_000, john.getSalary().getNet());
     }
 }
