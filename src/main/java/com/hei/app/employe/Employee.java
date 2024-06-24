@@ -33,7 +33,7 @@ public class Employee {
         if (hours > 0 && hours <= 8) salaryHoursSupp += salaryPerHour * 1.3 * hours;
         
         int lastOverTime = hours - 8;
-        if (hours > 0 && lastOverTime <= 12) salaryHoursSupp += salaryPerHour * 1.5 * lastOverTime;
+        if (lastOverTime > 0 && lastOverTime <= 12) salaryHoursSupp += salaryPerHour * 1.5 * lastOverTime;
         
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
