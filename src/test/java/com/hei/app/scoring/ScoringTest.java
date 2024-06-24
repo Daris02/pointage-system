@@ -41,7 +41,8 @@ public class ScoringTest {
             )
         );
 
-        assertEquals(scoring_rakoto.calculAfterScoring().getSalary().getNet(), gardien.getSalaryMatche() * 0.8);
+        scoring_rakoto.calculAfterScoring();
+        assertEquals(scoring_rakoto.getEmployee().getSalary().getNet(), gardien.getSalaryMatche() * 0.8);
     }
 
     @Test
@@ -72,9 +73,9 @@ public class ScoringTest {
             )
         );
 
-        assertTrue(scoring_rakoto.calculAfterScoring().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
+        scoring_rakoto.calculAfterScoring();
+        assertTrue(scoring_rakoto.getEmployee().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
-
 
     @Test
     void scoring_with_holiday_work() {
@@ -104,7 +105,8 @@ public class ScoringTest {
             )
         );
 
-        assertTrue(scoring_rakoto.calculAfterScoring().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
+        scoring_rakoto.calculAfterScoring();
+        assertTrue(scoring_rakoto.getEmployee().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
 
     @Test
@@ -135,6 +137,7 @@ public class ScoringTest {
             )
         );
 
-        assertTrue(scoring_rabe.calculAfterScoring().getSalary().getNet() > (gardien.getSalaryMatche() * 2) * 0.8);
+        scoring_rabe.calculAfterScoring();
+        assertTrue(scoring_rabe.getEmployee().getSalary().getNet() > (gardien.getSalaryMatche() * 2) * 0.8);
     }
 }
