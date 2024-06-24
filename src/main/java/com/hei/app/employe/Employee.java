@@ -16,26 +16,31 @@ public class Employee {
     private Category category;
 
     public Employee(String firstName, String lastName, String registrationNumber, 
-            Instant birthDate, Instant hireDate, Instant endContrat, Category category) {
+            String birthDate, String hireDate, String endContrat, Category category) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.registrationNumber = registrationNumber;
-        this.birthDate = birthDate;
-        this.hireDate = hireDate;
-        this.endContrat = endContrat;
+        this.birthDate = Instant.parse(birthDate+"T00:00:00Z");
+        this.hireDate = Instant.parse(hireDate+"T00:00:00Z");
+        this.endContrat = Instant.parse(endContrat+"T00:00:00Z");
         this.category = category;
         this.salary  = new Salary(category.getSalaryMatche());
     }
 
-    public void addHourSupp(int hours) {
-        double newSalary = 0;
-        if (hours <= 8 && hours < 12) newSalary = salary.getBrute() * 1.3;
-        if (hours >= 12) newSalary = salary.getBrute() * 1.5;
-        salary.setBrute(salary.getBrute() + newSalary);
+    public void addOverTime(int hours) {
+        double salaryHoursSupp = 0;
+        double salaryPerHour = salary.getBrute() / category.getWorkTime();
+        if (hours > 0 && hours <= 8) salaryHoursSupp += salaryPerHour * 1.3 * hours;
+        
+        int lastOverTime = hours - 8;
+        if (hours > 0 && lastOverTime <= 12) salaryHoursSupp += salaryPerHour * 1.5 * lastOverTime;
+        
+        salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
     
-    public void addNightHourSupp(int hours) {
-        salary.setBrute(salary.getBrute() * 1.3);
+    public void addNightOverTime(int hours) {
+        double salaryHoursSupp = salary.getBrute() * 1.3 * hours;
+        salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
     public void addSundaySupp(int numberOfDay) {
