@@ -35,8 +35,10 @@ public class Scoring {
         List<List<Day>> month = new ArrayList<>();
         List<Day> week = new ArrayList<>();
         for (Day day : calendar.getDays()) {
-            if (week.size() <= 7) week.add(day);
-            else {
+            if (week.size() < 7) {
+                week.add(day);
+                if (calendar.getDays().getLast() == day) month.add(week);
+            } else {
                 month.add(week);
                 week = new ArrayList<>();
                 week.add(day);
@@ -70,16 +72,16 @@ public class Scoring {
                 }
             }
         }
-        setWorkHours(workHours += workHoursInWeek);
-        setHoursSupp(hoursSupp += hoursSuppInWeek);;
-        setHolidaysSupp(holidaysSupp += holidaysSuppInWeek);;
-        setNightHoursSupp(nightHoursSupp += nightHoursSuppInWeek);;
-        setSundaySupp(sundaySupp += sundaySuppInWeek);
-        if (hoursSupp > 20) hoursSupp = 20;
-        employee.addOverTime(hoursSupp);
-        employee.addSundaySupp(sundaySupp);
-        employee.addHolidaySupp(holidaysSupp);
-        employee.addNightOverTime(nightHoursSupp);
+        workHours += workHoursInWeek;
+        hoursSupp += hoursSuppInWeek;
+        holidaysSupp += holidaysSuppInWeek;
+        nightHoursSupp += nightHoursSuppInWeek;
+        sundaySupp += sundaySuppInWeek;
+        if (hoursSuppInWeek > 20) hoursSuppInWeek = 20;
+        employee.addOverTime(hoursSuppInWeek);
+        employee.addSundaySupp(sundaySuppInWeek);
+        employee.addHolidaySupp(holidaysSuppInWeek);
+        employee.addNightOverTime(nightHoursSuppInWeek);
         return employee;
     }
 }
