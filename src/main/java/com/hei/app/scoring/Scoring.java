@@ -13,20 +13,32 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Scoring {
-    public Employee employee;
-    public final SpecialCalendar calendar;
-    public List<Attendance> attendances;
+    private Employee employee;
+    private final SpecialCalendar calendar;
+    private List<Attendance> attendances;
+    private int workHours = 0;
+    private int hoursSupp = 0;
+    private int holidaysSupp = 0;
+    private int nightHoursSupp = 0;
+    private int sundaySupp = 0;
+    
+    public Scoring(Employee employee, SpecialCalendar calendar, List<Attendance> attendances) {
+        this.employee = employee;
+        this.calendar = calendar;
+        this.attendances = attendances;
+    }
 
     public Employee calculAfterScoring() {
-        int workHoursSupp = 0;
-        int holidaysSupp = 0;
-        int nightHoursSupp = 0;
-        int sundaySupp = 0;
         for (Day day : calendar.getDays()) {
             for (Attendance attendance : attendances) {
                 if (day.value() == attendance.getDay()) {
-                    int workHours = attendance.getWorkHours();
-                    if (workHours > 0) workHoursSupp += workHours;
+                    int workHourInDay = attendance.getWorkHours();
+                    workHours += workHourInDay;
+                    // if (employee.getCategory().getName().equals(CategoryType.guardian)) {
+                    //     if (workHourInDay > 10) hoursSupp += (workHourInDay - 10);
+                    // } else {
+                        if (workHourInDay > 8) hoursSupp += (workHourInDay - 8);
+                    // }
                     if (day.isHoliday()) holidaysSupp++;
                     if (day.name() == "Sunday" && employee.getCategory().getName() != CategoryType.guardian)
                         sundaySupp++;
@@ -36,10 +48,10 @@ public class Scoring {
                 }
             }
         }
-        employee.addHourSupp(workHoursSupp);
+        employee.addOverTime(hoursSupp);
         employee.addSundaySupp(sundaySupp);
         employee.addHolidaySupp(holidaysSupp);
-        employee.addNightHourSupp(nightHoursSupp);
+        employee.addNightOverTime(nightHoursSupp);
         return employee;
     }
 }
