@@ -45,11 +45,6 @@ public class Scoring {
                 }
             }
         }
-        System.out.println("Work Hour: " + workHours);
-        System.out.println("Hours Supp: " + hoursSupp);
-        System.out.println("Night Hours Supp: " + nightHoursSupp);
-        System.out.println("Sunday Supp: " + sundaySupp);
-        System.out.println("Holiday Supp: " + holidaysSupp);
         employee.addOverTime(hoursSupp);
         employee.addSundaySupp(sundaySupp);
         employee.addHolidaySupp(holidaysSupp);
