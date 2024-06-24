@@ -2,7 +2,6 @@ package com.hei.app.scoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.Instant;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -21,9 +20,9 @@ public class ScoringTest {
 
         var rakoto = new Employee(
             "Rakoto", "Be", "1234",
-            Instant.parse("2001-02-02T00:00:00Z"),
-            Instant.parse("2020-07-12T00:00:00Z"),
-            Instant.parse("2030-07-12T00:00:00Z"),
+            "2001-02-02",
+            "2020-07-12",
+            "2030-07-12",
             gardien
         );
 
@@ -38,7 +37,6 @@ public class ScoringTest {
                 new Attendance(21, "08:00-17:00"),
                 new Attendance(22, "08:00-17:00"),
                 new Attendance(23, "08:00-17:00")
-                // new Attendance(24, "08:00-17:00")
             )
         );
 
