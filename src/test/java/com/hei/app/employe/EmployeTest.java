@@ -36,12 +36,12 @@ public class EmployeTest {
         
         List<Attendance> listAtttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAtttendanceMay.add(new Attendance(i, "07:00-17:00"));
+            listAtttendanceJune.add(new Attendance(i, "07:00-17:00"));
         }
         
         List<Attendance> listAtttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAtttendanceMay.add(new Attendance(i, "07:00-17:00"));
+            listAtttendanceJuly.add(new Attendance(i, "07:00-17:00"));
         }
 
         var scoringRabeMay = new Scoring(rabe, calandarMay, listAtttendanceMay);
