@@ -33,12 +33,9 @@ public class Scoring {
             for (Attendance attendance : attendances) {
                 if (day.value() == attendance.getDay()) {
                     int workHourInDay = attendance.getWorkHours();
+                    int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/7;
                     workHours += workHourInDay;
-                    // if (employee.getCategory().getName().equals(CategoryType.guardian)) {
-                    //     if (workHourInDay > 10) hoursSupp += (workHourInDay - 10);
-                    // } else {
-                        if (workHourInDay > 8) hoursSupp += (workHourInDay - 8);
-                    // }
+                    if (workHourInDay > defaultWorkHourPerDay) hoursSupp += (workHourInDay - defaultWorkHourPerDay);
                     if (day.isHoliday()) holidaysSupp++;
                     if (day.name() == "Sunday" && employee.getCategory().getName() != CategoryType.guardian)
                         sundaySupp++;
@@ -48,6 +45,11 @@ public class Scoring {
                 }
             }
         }
+        System.out.println("Work Hour: " + workHours);
+        System.out.println("Hours Supp: " + hoursSupp);
+        System.out.println("Night Hours Supp: " + nightHoursSupp);
+        System.out.println("Sunday Supp: " + sundaySupp);
+        System.out.println("Holiday Supp: " + holidaysSupp);
         employee.addOverTime(hoursSupp);
         employee.addSundaySupp(sundaySupp);
         employee.addHolidaySupp(holidaysSupp);
