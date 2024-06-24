@@ -1,9 +1,12 @@
 package com.hei.app.employe;
 
+import java.text.DecimalFormat;
+
 import lombok.Data;
 
 @Data
 public class Salary {
+    private double net;
     private double brute;
 
     public Salary(double brute) {
@@ -11,6 +14,15 @@ public class Salary {
     }
 
     public double getNet() {
-        return brute * 0.8;
+        setBrute(roundDouble(brute));
+        setNet(roundDouble(brute * 0.8));
+        return net;
+    }
+
+    private double roundDouble(double number) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        String numberRoundString = df.format(number);
+        double numberRound = Double.parseDouble(numberRoundString);
+        return numberRound;
     }
 }
