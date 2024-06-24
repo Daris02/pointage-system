@@ -29,25 +29,27 @@ public class Employee {
 
     public void addOverTime(int hours) {
         double salaryHoursSupp = 0;
-        double salaryPerHour = salary.getBrute() / category.getWorkTime();
-        if (hours > 0 && hours <= 8) salaryHoursSupp += salaryPerHour * 1.3 * hours;
+        if (hours > 0 && hours <= 8) salaryHoursSupp += salaryPerHour() * 1.3 * hours;
         
         int lastOverTime = hours - 8;
-        if (lastOverTime > 0 && lastOverTime <= 12) salaryHoursSupp += salaryPerHour * 1.5 * lastOverTime;
-        
+        if (lastOverTime > 0) salaryHoursSupp += salaryPerHour() * 1.5 * lastOverTime;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
     
     public void addNightOverTime(int hours) {
-        double salaryHoursSupp = salary.getBrute() * 1.3 * hours;
+        double salaryHoursSupp = salaryPerHour() * 1.3 * hours;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
-    public void addSundaySupp(int numberOfDay) {
-        if (numberOfDay > 0) salary.setBrute(salary.getBrute() * 1.4 * numberOfDay);
+    public void addSundaySupp(int hours) {
+        salary.setBrute(salary.getBrute() + (salaryPerHour() * 1.4 * hours));
     }
 
-    public void addHolidaySupp(int numberOfDay) {
-        if (numberOfDay > 0) salary.setBrute(salary.getBrute() * 1.5 * numberOfDay);
+    public void addHolidaySupp(int hours) {
+        salary.setBrute(salary.getBrute() + (salaryPerHour() * 1.5 * hours));
+    }
+
+    private double salaryPerHour() {
+        return salary.getBrute() / category.getWorkTime();
     }
 }
