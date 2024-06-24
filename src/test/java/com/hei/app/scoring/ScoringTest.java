@@ -106,4 +106,35 @@ public class ScoringTest {
 
         assertTrue(scoring_rakoto.calculAfterScoring().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
+
+    @Test
+    void scoring_with_night_work() {
+        var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
+
+        var gardien = new Category(CategoryType.guardian, 74, 110_000);
+
+        var rabe = new Employee(
+            "Rabe", "Be", "1234",
+            "2001-02-02",
+            "2020-07-12",
+            "2030-07-12",
+            gardien
+        );
+
+        var scoring_rabe = new Scoring(
+            rabe,
+            calandar_juin,
+            List.of(
+                new Attendance(18, "18:00-05:00"),
+                new Attendance(19, "18:00-05:00"),
+                new Attendance(20, "18:00-05:00"),
+                new Attendance(21, "18:00-05:00"),
+                new Attendance(22, "18:00-05:00"),
+                new Attendance(23, "18:00-05:00"),
+                new Attendance(24, "18:00-05:00")
+            )
+        );
+
+        assertTrue(scoring_rabe.calculAfterScoring().getSalary().getNet() > (gardien.getSalaryMatche() * 2) * 0.8);
+    }
 }
