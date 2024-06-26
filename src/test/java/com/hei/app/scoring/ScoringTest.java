@@ -139,7 +139,11 @@ public class ScoringTest {
         scoringRakotoJune.calculAfterScoring();
         scoringRakotoJuly.calculAfterScoring();
         
-        assertEquals(rounded(612_856.959), rounded(rakoto.getSalary().getBrute()));
+        /** This test for 30% of HM */
+        // assertEquals(rounded(612_856.959), rounded(rakoto.getSalary().getBrute()));
+
+        /** This test for 50% of HM */
+        assertEquals(rounded(621_428.385), rounded(rakoto.getSalary().getBrute()));
     }
 
     @Test
@@ -181,7 +185,11 @@ public class ScoringTest {
         scoringRabeJune.calculAfterScoring();
         scoringRabeJuly.calculAfterScoring();
         
-        assertEquals(rounded(796_713.92), rounded(rabe.getSalary().getBrute()));
+        /** This test for 30% of HM */
+        // assertEquals(rounded(796_713.92), rounded(rabe.getSalary().getBrute()));
+        
+        /** This test for 50% of HM */
+        assertEquals(rounded(807_856.77), rounded(rabe.getSalary().getBrute()));
     }
 
     @Test

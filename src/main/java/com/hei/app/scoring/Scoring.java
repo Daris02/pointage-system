@@ -49,7 +49,7 @@ public class Scoring {
         }
     }
 
-    private Employee calculAfterScoringInWeek(List<Day> calendar) {
+    private void calculAfterScoringInWeek(List<Day> calendar) {
         int workHoursInWeek = 0;
         int hoursSuppInWeek = 0;
         int holidaysSuppInWeek = 0;
@@ -63,11 +63,9 @@ public class Scoring {
                     workHoursInWeek += workHourInDay;
 
                     if (workHourInDay > defaultWorkHourPerDay) hoursSuppInWeek += (workHourInDay - defaultWorkHourPerDay);
-                    if (attendance.containsNightHours()) {
-                        nightHoursSuppInWeek += attendance.getNightWorkHours();
-                    }
+                    if (attendance.containsNightHours()) nightHoursSuppInWeek += attendance.getNightWorkHours();
                     if (day.isHoliday()) holidaysSuppInWeek += workHourInDay;
-                    if (day.name() == "Sunday" && employee.getCategory().getName() != CategoryType.guardian)
+                    if (day.name().equals("Sunday") && employee.getCategory().getName() != CategoryType.guardian)
                         sundaySuppInWeek += workHourInDay;
                 }
             }
@@ -83,6 +81,5 @@ public class Scoring {
         employee.addNightOverTime(nightHoursSuppInWeek);
         employee.addSundaySupp(sundaySuppInWeek);
         employee.addHolidaySupp(holidaysSuppInWeek);
-        return employee;
     }
 }
