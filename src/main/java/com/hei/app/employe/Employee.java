@@ -34,24 +34,24 @@ public class Employee {
 
     public void addOverTime(int hours) {
         double salaryHoursSupp = 0;
-        if (hours <= 8) salaryHoursSupp += salaryPerHour() * 1.3 * hours;
+        if (hours <= 8) salaryHoursSupp += salaryPerHour() * 0.3 * hours;
         
         int lastOverTime = hours - 8;
-        if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 1.5 * lastOverTime;
+        if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 0.5 * lastOverTime;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
     
     public void addNightOverTime(int hours) {
-        double salaryHoursSupp = salaryPerHour() * 1.3 * hours;
+        double salaryHoursSupp = salaryPerHour() * 0.3 * hours;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
     public void addSundaySupp(int hours) {
-        salary.setBrute(salary.getBrute() + (salaryPerHour() * 1.4 * hours));
+        salary.setBrute(salary.getBrute() + (salaryPerHour() * 0.4 * hours));
     }
 
     public void addHolidaySupp(int hours) {
-        salary.setBrute(salary.getBrute() + (salaryPerHour() * 1.5 * hours));
+        salary.setBrute(salary.getBrute() + (salaryPerHour() * 0.5 * hours));
     }
 
     public double salaryPerHour() {
