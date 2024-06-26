@@ -30,7 +30,7 @@ public class Attendance {
         if (containsNightHours()) {
             int nightHours = 0;
             nightHours += Duration.between(LocalTime.of(18, 0), begin).toHoursPart();
-            nightHours += Duration.between(begin, LocalTime.of(6, 0)).toHoursPart();
+            nightHours += Duration.between(begin, LocalTime.of(4, 0)).toHoursPart();
             return Math.abs(nightHours);
         }
         return 0;
@@ -38,6 +38,6 @@ public class Attendance {
 
     public boolean containsNightHours() {
         return begin.isAfter(LocalTime.of(18, 0)) || begin.getHour() == 18 ||
-            end.isBefore(LocalTime.of(6, 0)) || end.getHour() == 6;
+            end.isBefore(LocalTime.of(4, 0)) || end.getHour() == 4;
     }
 }
