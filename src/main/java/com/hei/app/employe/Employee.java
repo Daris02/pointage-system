@@ -1,6 +1,5 @@
 package com.hei.app.employe;
 
-import java.text.DecimalFormat;
 import java.time.Instant;
 
 import lombok.Data;
@@ -47,21 +46,16 @@ public class Employee {
     }
 
     public void addSundaySupp(int hours) {
-        salary.setBrute(salary.getBrute() + (salaryPerHour() * 0.4 * hours));
+        double salaryHoursSupp = salaryPerHour() * 0.4 * hours;
+        salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
     public void addHolidaySupp(int hours) {
-        salary.setBrute(salary.getBrute() + (salaryPerHour() * 0.5 * hours));
+        double salaryHoursSupp = salaryPerHour() * 0.5 * hours;
+        salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
-    public double salaryPerHour() {
-        return roundDouble(category.getSalaryMatche()/ category.getWorkTime());
-    }
-
-    private double roundDouble(double number) {
-        DecimalFormat df = new DecimalFormat("#.###");
-        String numberRoundString = df.format(number);
-        double numberRound = Double.parseDouble(numberRoundString);
-        return numberRound;
+    private double salaryPerHour() {
+        return category.getSalaryMatche()/ category.getWorkTime();
     }
 }
