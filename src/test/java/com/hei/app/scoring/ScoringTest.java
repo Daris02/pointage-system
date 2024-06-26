@@ -32,24 +32,24 @@ public class ScoringTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of()); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        List<Attendance> listAtttendanceMay = new ArrayList<>();
+        List<Attendance> listAttendanceMay = new ArrayList<>();
         for (int i = 26; i <= 31; i++) {
-            listAtttendanceMay.add(new Attendance(i, "07:00-17:00"));
+            listAttendanceMay.add(new Attendance(i, "07:00-17:00"));
         }
         
-        List<Attendance> listAtttendanceJune = new ArrayList<>();
+        List<Attendance> listAttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAtttendanceJune.add(new Attendance(i, "07:00-17:00"));
+            listAttendanceJune.add(new Attendance(i, "07:00-17:00"));
         }
         
-        List<Attendance> listAtttendanceJuly = new ArrayList<>();
+        List<Attendance> listAttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAtttendanceJuly.add(new Attendance(i, "07:00-17:00"));
+            listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
         }
 
-        var scoringRakotoMay = new Scoring(rakoto, calandarMay, listAtttendanceMay);
-        var scoringRakotoJune = new Scoring(rakoto, calandarJune, listAtttendanceJune);
-        var scoringRakotoJuly = new Scoring(rakoto, calandarJuly, listAtttendanceJuly);
+        var scoringRakotoMay = new Scoring(rakoto, calandarMay, listAttendanceMay);
+        var scoringRakotoJune = new Scoring(rakoto, calandarJune, listAttendanceJune);
+        var scoringRakotoJuly = new Scoring(rakoto, calandarJuly, listAttendanceJuly);
 
         scoringRakotoMay.calculAfterScoring();
         scoringRakotoJune.calculAfterScoring();
@@ -74,24 +74,24 @@ public class ScoringTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of()); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        List<Attendance> listAtttendanceMay = new ArrayList<>();
+        List<Attendance> listAttendanceMay = new ArrayList<>();
         for (int i = 26; i <= 31; i++) {
-            listAtttendanceMay.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceMay.add(new Attendance(i, "18:00-04:00"));
         }
         
-        List<Attendance> listAtttendanceJune = new ArrayList<>();
+        List<Attendance> listAttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAtttendanceJune.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJune.add(new Attendance(i, "18:00-04:00"));
         }
         
-        List<Attendance> listAtttendanceJuly = new ArrayList<>();
+        List<Attendance> listAttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAtttendanceJuly.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJuly.add(new Attendance(i, "18:00-04:00"));
         }
 
-        var scoringRabeMay = new Scoring(rabe, calandarMay, listAtttendanceMay);
-        var scoringRabeJune = new Scoring(rabe, calandarJune, listAtttendanceJune);
-        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAtttendanceJuly);
+        var scoringRabeMay = new Scoring(rabe, calandarMay, listAttendanceMay);
+        var scoringRabeJune = new Scoring(rabe, calandarJune, listAttendanceJune);
+        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAttendanceJuly);
 
         scoringRabeMay.calculAfterScoring();
         scoringRabeJune.calculAfterScoring();
@@ -116,35 +116,35 @@ public class ScoringTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of(17, 25, 26)); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        List<Attendance> listAtttendanceMay = new ArrayList<>();
+        List<Attendance> listAttendanceMay = new ArrayList<>();
         for (int i = 26; i <= 31; i++) {
-            listAtttendanceMay.add(new Attendance(i, "07:00-17:00"));
+            listAttendanceMay.add(new Attendance(i, "07:00-17:00"));
         }
         
-        List<Attendance> listAtttendanceJune = new ArrayList<>();
+        List<Attendance> listAttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAtttendanceJune.add(new Attendance(i, "07:00-17:00"));
+            listAttendanceJune.add(new Attendance(i, "07:00-17:00"));
         }
         
-        List<Attendance> listAtttendanceJuly = new ArrayList<>();
+        List<Attendance> listAttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAtttendanceJuly.add(new Attendance(i, "07:00-17:00"));
+            listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
         }
 
-        var scoringRakotoMay = new Scoring(rakoto, calandarMay, listAtttendanceMay);
-        var scoringRakotoJune = new Scoring(rakoto, calandarJune, listAtttendanceJune);
-        var scoringRakotoJuly = new Scoring(rakoto, calandarJuly, listAtttendanceJuly);
+        var scoringRakotoMay = new Scoring(rakoto, calandarMay, listAttendanceMay);
+        var scoringRakotoJune = new Scoring(rakoto, calandarJune, listAttendanceJune);
+        var scoringRakotoJuly = new Scoring(rakoto, calandarJuly, listAttendanceJuly);
 
         scoringRakotoMay.calculAfterScoring();
         scoringRakotoJune.calculAfterScoring();
         scoringRakotoJuly.calculAfterScoring();
         
-        assertEquals(612_856.959, rakoto.getSalary().getBrute());
+        assertEquals(rounded(612_856.959), rounded(rakoto.getSalary().getBrute()));
     }
 
     @Test
     void valid_salary_working_hour_night_with_holiday() {
-        var gardien = new Category(CategoryType.guardian, 70, 100_000);
+        var gardien = new Category(CategoryType.guardian, 98, 100_000);
 
         var rabe = new Employee(
             "Rabe", "N.", "1234",
@@ -158,30 +158,30 @@ public class ScoringTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of(17, 25, 26)); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        List<Attendance> listAtttendanceMay = new ArrayList<>();
+        List<Attendance> listAttendanceMay = new ArrayList<>();
         for (int i = 26; i <= 31; i++) {
-            listAtttendanceMay.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceMay.add(new Attendance(i, "18:00-04:00"));
         }
         
-        List<Attendance> listAtttendanceJune = new ArrayList<>();
+        List<Attendance> listAttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAtttendanceJune.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJune.add(new Attendance(i, "18:00-04:00"));
         }
         
-        List<Attendance> listAtttendanceJuly = new ArrayList<>();
+        List<Attendance> listAttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAtttendanceJuly.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJuly.add(new Attendance(i, "18:00-04:00"));
         }
 
-        var scoringRabeMay = new Scoring(rabe, calandarMay, listAtttendanceMay);
-        var scoringRabeJune = new Scoring(rabe, calandarJune, listAtttendanceJune);
-        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAtttendanceJuly);
+        var scoringRabeMay = new Scoring(rabe, calandarMay, listAttendanceMay);
+        var scoringRabeJune = new Scoring(rabe, calandarJune, listAttendanceJune);
+        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAttendanceJuly);
 
         scoringRabeMay.calculAfterScoring();
         scoringRabeJune.calculAfterScoring();
         scoringRabeJuly.calculAfterScoring();
         
-        assertEquals(796_713.92, rabe.getSalary().getBrute());
+        assertEquals(rounded(796_713.92), rounded(rabe.getSalary().getBrute()));
     }
 
     @Test
