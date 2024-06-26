@@ -45,7 +45,7 @@ public class Scoring {
             }
         }
         for (List<Day> weekOfMonth : month) {
-            employee = calculAfterScoringInWeek(weekOfMonth);
+            calculAfterScoringInWeek(weekOfMonth);
         }
     }
 
@@ -78,6 +78,7 @@ public class Scoring {
         nightHoursSupp += nightHoursSuppInWeek;
         sundaySupp += sundaySuppInWeek;
         if (hoursSuppInWeek > 20) hoursSuppInWeek = 20;
+        employee.updateSalary(workHoursInWeek);
         employee.addOverTime(hoursSuppInWeek);
         employee.addSundaySupp(sundaySuppInWeek);
         employee.addHolidaySupp(holidaysSuppInWeek);

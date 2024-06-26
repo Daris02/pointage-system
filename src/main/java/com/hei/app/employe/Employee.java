@@ -1,5 +1,6 @@
 package com.hei.app.employe;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 
 import lombok.Data;
@@ -24,15 +25,19 @@ public class Employee {
         this.hireDate = Instant.parse(hireDate+"T00:00:00Z");
         this.endContrat = Instant.parse(endContrat+"T00:00:00Z");
         this.category = category;
-        this.salary  = new Salary(category.getSalaryMatche());
+        this.salary  = new Salary(0);
+    }
+
+    public void updateSalary(int hours) {
+        setSalary(new Salary(salary.getBrute() + salaryPerHour() * hours));
     }
 
     public void addOverTime(int hours) {
         double salaryHoursSupp = 0;
-        if (hours > 0 && hours <= 8) salaryHoursSupp += salaryPerHour() * 1.3 * hours;
+        if (hours <= 8) salaryHoursSupp += salaryPerHour() * 1.3 * hours;
         
         int lastOverTime = hours - 8;
-        if (lastOverTime > 0) salaryHoursSupp += salaryPerHour() * 1.5 * lastOverTime;
+        if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 1.5 * lastOverTime;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
     
@@ -49,7 +54,14 @@ public class Employee {
         salary.setBrute(salary.getBrute() + (salaryPerHour() * 1.5 * hours));
     }
 
-    private double salaryPerHour() {
-        return salary.getBrute() / category.getWorkTime();
+    public double salaryPerHour() {
+        return roundDouble(category.getSalaryMatche()/ category.getWorkTime());
+    }
+
+    private double roundDouble(double number) {
+        DecimalFormat df = new DecimalFormat("#.###");
+        String numberRoundString = df.format(number);
+        double numberRound = Double.parseDouble(numberRoundString);
+        return numberRound;
     }
 }
