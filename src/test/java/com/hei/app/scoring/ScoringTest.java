@@ -76,17 +76,17 @@ public class ScoringTest {
         
         List<Attendance> listAttendanceMay = new ArrayList<>();
         for (int i = 26; i <= 31; i++) {
-            listAttendanceMay.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceMay.add(new Attendance(i, "17:00-07:00"));
         }
         
         List<Attendance> listAttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAttendanceJune.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJune.add(new Attendance(i, "17:00-07:00"));
         }
         
         List<Attendance> listAttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAttendanceJuly.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
         }
 
         var scoringRabeMay = new Scoring(rabe, calandarMay, listAttendanceMay);
@@ -164,17 +164,17 @@ public class ScoringTest {
         
         List<Attendance> listAttendanceMay = new ArrayList<>();
         for (int i = 26; i <= 31; i++) {
-            listAttendanceMay.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceMay.add(new Attendance(i, "17:00-07:00"));
         }
         
         List<Attendance> listAttendanceJune = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            listAttendanceJune.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJune.add(new Attendance(i, "17:00-07:00"));
         }
         
         List<Attendance> listAttendanceJuly = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            listAttendanceJuly.add(new Attendance(i, "18:00-04:00"));
+            listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
         }
 
         var scoringRabeMay = new Scoring(rabe, calandarMay, listAttendanceMay);
@@ -306,13 +306,13 @@ public class ScoringTest {
             rabe,
             calandar_juin,
             List.of(
-                new Attendance(18, "18:00-04:00"),
-                new Attendance(19, "18:00-04:00"),
-                new Attendance(20, "18:00-04:00"),
-                new Attendance(21, "18:00-04:00"),
-                new Attendance(22, "18:00-04:00"),
-                new Attendance(23, "18:00-04:00"),
-                new Attendance(24, "18:00-04:00")
+                new Attendance(18, "17:00-07:00"),
+                new Attendance(19, "17:00-07:00"),
+                new Attendance(20, "17:00-07:00"),
+                new Attendance(21, "17:00-07:00"),
+                new Attendance(22, "17:00-07:00"),
+                new Attendance(23, "17:00-07:00"),
+                new Attendance(24, "17:00-07:00")
             )
         );
 
