@@ -45,7 +45,7 @@ public class Scoring {
             }
         }
         for (List<Day> weekOfMonth : month) {
-            calculAfterScoringInWeek(weekOfMonth);
+                calculAfterScoringInWeek(weekOfMonth);
         }
     }
 
@@ -61,9 +61,9 @@ public class Scoring {
                     int workHourInDay = attendance.getWorkHours();
                     int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/7;
                     workHoursInWeek += workHourInDay;
+
                     if (workHourInDay > defaultWorkHourPerDay) hoursSuppInWeek += (workHourInDay - defaultWorkHourPerDay);
                     if (attendance.containsNightHours()) {
-                        hoursSuppInWeek += attendance.getNightWorkHours();
                         nightHoursSuppInWeek += attendance.getNightWorkHours();
                     }
                     if (day.isHoliday()) holidaysSuppInWeek += workHourInDay;
@@ -80,9 +80,9 @@ public class Scoring {
         if (hoursSuppInWeek > 20) hoursSuppInWeek = 20;
         employee.updateSalary(workHoursInWeek);
         employee.addOverTime(hoursSuppInWeek);
+        employee.addNightOverTime(nightHoursSuppInWeek);
         employee.addSundaySupp(sundaySuppInWeek);
         employee.addHolidaySupp(holidaysSuppInWeek);
-        employee.addNightOverTime(nightHoursSuppInWeek);
         return employee;
     }
 }
