@@ -13,6 +13,10 @@ public class Salary {
         this.brute = brute;
     }
 
+    public double getBrute() {
+        return roundDouble(brute);
+    }
+
     public double getNet() {
         setBrute(roundDouble(brute));
         setNet(roundDouble(brute * 0.8));
