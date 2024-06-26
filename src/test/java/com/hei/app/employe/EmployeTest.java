@@ -68,6 +68,7 @@ public class EmployeTest {
             gardien
         );
 
+        john.setSalary(new Salary(john.getCategory().getSalaryMatche()));
         assertEquals(80_000, john.getSalary().getNet());
     }
 }
