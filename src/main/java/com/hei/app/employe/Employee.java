@@ -45,12 +45,12 @@ public class Employee {
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
-    public void addSundaySupp(int hours) {
+    public void additionalSunday(int hours) {
         double salaryHoursSupp = salaryPerHour() * 0.4 * hours;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }
 
-    public void addHolidaySupp(int hours) {
+    public void additionalHolidays(int hours) {
         double salaryHoursSupp = salaryPerHour() * 0.5 * hours;
         salary.setBrute(salary.getBrute() + salaryHoursSupp);
     }

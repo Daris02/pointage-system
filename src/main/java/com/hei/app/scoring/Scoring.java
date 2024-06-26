@@ -20,10 +20,10 @@ public class Scoring {
     private SpecialCalendar calendar;
     private List<Attendance> attendances;
     private int workHours = 0;
-    private int hoursSupp = 0;
-    private int holidaysSupp = 0;
-    private int nightHoursSupp = 0;
-    private int sundaySupp = 0;
+    private int overTime = 0;
+    private int additionalHolidays = 0;
+    private int nightOverTime = 0;
+    private int additionalSunday = 0;
     
     public Scoring(Employee employee, SpecialCalendar calendar, List<Attendance> attendances) {
         this.employee = employee;
@@ -51,10 +51,10 @@ public class Scoring {
 
     private void calculAfterScoringInWeek(List<Day> calendar) {
         int workHoursInWeek = 0;
-        int hoursSuppInWeek = 0;
-        int holidaysSuppInWeek = 0;
-        int nightHoursSuppInWeek = 0;
-        int sundaySuppInWeek = 0;
+        int overTimeInWeek = 0;
+        int additionalHolidaysInWeek = 0;
+        int nightOverTimeInWeek = 0;
+        int additionalSundayInWeek = 0;
         for (Day day : calendar) {
             for (Attendance attendance : attendances) {
                 if (day.value() == attendance.getDay()) {
@@ -62,24 +62,24 @@ public class Scoring {
                     int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/7;
                     workHoursInWeek += workHourInDay;
 
-                    if (workHourInDay > defaultWorkHourPerDay) hoursSuppInWeek += (workHourInDay - defaultWorkHourPerDay);
-                    if (attendance.containsNightHours()) nightHoursSuppInWeek += attendance.getNightWorkHours();
-                    if (day.isHoliday()) holidaysSuppInWeek += workHourInDay;
+                    if (workHourInDay > defaultWorkHourPerDay) overTimeInWeek += (workHourInDay - defaultWorkHourPerDay);
+                    if (attendance.containsNightHours()) nightOverTimeInWeek += attendance.getNightWorkHours();
+                    if (day.isHoliday()) additionalHolidaysInWeek += workHourInDay;
                     if (day.name().equals("Sunday") && employee.getCategory().getName() != CategoryType.guardian)
-                        sundaySuppInWeek += workHourInDay;
+                        additionalSundayInWeek += workHourInDay;
                 }
             }
         }
         workHours += workHoursInWeek;
-        hoursSupp += hoursSuppInWeek;
-        holidaysSupp += holidaysSuppInWeek;
-        nightHoursSupp += nightHoursSuppInWeek;
-        sundaySupp += sundaySuppInWeek;
-        if (hoursSuppInWeek > 20) hoursSuppInWeek = 20;
+        overTime += overTimeInWeek;
+        additionalHolidays += additionalHolidaysInWeek;
+        nightOverTime += nightOverTimeInWeek;
+        additionalSunday += additionalSundayInWeek;
+        if (overTimeInWeek > 20) overTimeInWeek = 20;
         employee.updateSalary(workHoursInWeek);
-        employee.addOverTime(hoursSuppInWeek);
-        employee.addNightOverTime(nightHoursSuppInWeek);
-        employee.addSundaySupp(sundaySuppInWeek);
-        employee.addHolidaySupp(holidaysSuppInWeek);
+        employee.addOverTime(overTimeInWeek);
+        employee.addNightOverTime(nightOverTimeInWeek);
+        employee.additionalSunday(additionalSundayInWeek);
+        employee.additionalHolidays(additionalHolidaysInWeek);
     }
 }
