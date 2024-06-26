@@ -213,7 +213,7 @@ public class ScoringTest {
         );
 
         scoring_rakoto.calculAfterScoring();
-        assertEquals(rounded(rakoto.getSalary().getNet()), rounded(79999.98));
+        assertEquals(rakoto.getSalary().getNet(), 80_000.0);
     }
 
     @Test
@@ -245,7 +245,7 @@ public class ScoringTest {
         );
 
         scoring_rakoto.calculAfterScoring();
-        assertTrue(scoring_rakoto.getEmployee().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
+        assertTrue(rakoto.getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
 
     @Test
@@ -277,7 +277,7 @@ public class ScoringTest {
         );
 
         scoring_rakoto.calculAfterScoring();
-        assertTrue(scoring_rakoto.getEmployee().getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
+        assertTrue(rakoto.getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
 
     @Test
