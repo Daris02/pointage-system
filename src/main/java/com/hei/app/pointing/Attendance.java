@@ -22,14 +22,12 @@ public class Attendance {
 
     public int getWorkHours() {
         if (containsNightHours())
-            return Duration.between(begin.plusHours(10), end.plusHours(10)).toHoursPart();
+            return Duration.between(begin.plusHours(12), end.plusHours(12)).toHoursPart();
         return Duration.between(begin, end).toHoursPart();
     }
 
     public int getNightWorkHours() {
-        if (containsNightHours())
-            return Duration.between(begin.plusHours(10), end.plusHours(10)).toHoursPart();
-        return 0;
+        return Duration.between(begin.plusHours(12), end.plusHours(12)).toHoursPart();
     }
 
     public boolean containsNightHours() {

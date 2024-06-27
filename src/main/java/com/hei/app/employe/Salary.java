@@ -18,15 +18,12 @@ public class Salary {
     }
 
     public double getNet() {
-        setBrute(roundDouble(brute));
-        setNet(roundDouble(brute * 0.8));
-        return net;
+        return roundDouble(brute * 0.8);
     }
 
     private double roundDouble(double number) {
         DecimalFormat df = new DecimalFormat("#.##");
         String numberRoundString = df.format(number);
-        double numberRound = Double.parseDouble(numberRoundString);
-        return numberRound;
+        return Double.parseDouble(numberRoundString);
     }
 }
