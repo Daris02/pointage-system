@@ -28,16 +28,16 @@ public class Employee {
     }
 
     public void updateSalary(int hours) {
-        setSalary(new Salary(salary.getBrute() + salaryPerHour() * hours));
+        salary.setBrute(salaryPerHour() * hours);
     }
 
-    public void addOverTime(int hours) {
+    public double addOverTime(int hours) {
         double salaryHoursSupp = 0;
         if (hours <= 8) salaryHoursSupp += salaryPerHour() * 0.3 * hours;
         
         int lastOverTime = hours - 8;
         if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 0.5 * lastOverTime;
-        salary.setBrute(salary.getBrute() + salaryHoursSupp);
+        return salaryHoursSupp;
     }
     
     public void addNightOverTime(int hours) {
