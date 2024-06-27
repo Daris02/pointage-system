@@ -1,4 +1,4 @@
-package com.hei.app.scoring;
+package com.hei.app.pointing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Scoring {
+public class Pointing {
     private Employee employee;
     private SpecialCalendar calendar;
     private List<Attendance> attendances;
@@ -25,13 +25,13 @@ public class Scoring {
     private int nightOverTime = 0;
     private int additionalSunday = 0;
     
-    public Scoring(Employee employee, SpecialCalendar calendar, List<Attendance> attendances) {
+    public Pointing(Employee employee, SpecialCalendar calendar, List<Attendance> attendances) {
         this.employee = employee;
         this.calendar = calendar;
         this.attendances = attendances;
     }
 
-    public void calculAfterScoring() {
+    public void calculAfterPointing() {
         List<List<Day>> month = new ArrayList<>();
         List<Day> week = new ArrayList<>();
         for (Day day : calendar.getDays()) {
@@ -45,11 +45,11 @@ public class Scoring {
             }
         }
         for (List<Day> weekOfMonth : month) {
-                calculAfterScoringInWeek(weekOfMonth);
+                calculAfterPointingInWeek(weekOfMonth);
         }
     }
 
-    private void calculAfterScoringInWeek(List<Day> calendar) {
+    private void calculAfterPointingInWeek(List<Day> calendar) {
         int workHoursInWeek = 0;
         int overTimeInWeek = 0;
         int additionalHolidaysInWeek = 0;

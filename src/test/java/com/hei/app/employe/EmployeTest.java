@@ -8,8 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.hei.app.calendrier.SpecialCalendar;
-import com.hei.app.scoring.Attendance;
-import com.hei.app.scoring.Scoring;
+import com.hei.app.pointing.Attendance;
+import com.hei.app.pointing.Pointing;
 
 public class EmployeTest {
     
@@ -44,14 +44,14 @@ public class EmployeTest {
             listAtttendanceJuly.add(new Attendance(i, "07:00-17:00"));
         }
 
-        var scoringRabeMay = new Scoring(rabe, calandarMay, listAtttendanceMay);
-        var scoringRabeJune = new Scoring(rabe, calandarJune, listAtttendanceJune);
-        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAtttendanceJuly);
+        var pointingRabeMay = new Pointing(rabe, calandarMay, listAtttendanceMay);
+        var pointingRabeJune = new Pointing(rabe, calandarJune, listAtttendanceJune);
+        var pointingRabeJuly = new Pointing(rabe, calandarJuly, listAtttendanceJuly);
 
-        scoringRabeMay.calculAfterScoring();
-        scoringRabeJune.calculAfterScoring();
-        scoringRabeJuly.calculAfterScoring();
-        var totalWorkHoursRabe  = scoringRabeMay.getWorkHours() + scoringRabeJune.getWorkHours() + scoringRabeJuly.getWorkHours();
+        pointingRabeMay.calculAfterPointing();
+        pointingRabeJune.calculAfterPointing();
+        pointingRabeJuly.calculAfterPointing();
+        var totalWorkHoursRabe  = pointingRabeMay.getWorkHours() + pointingRabeJune.getWorkHours() + pointingRabeJuly.getWorkHours();
         assertEquals(420, totalWorkHoursRabe);
     }
 

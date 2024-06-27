@@ -1,4 +1,4 @@
-package com.hei.app.scoring;
+package com.hei.app.pointing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,7 +14,7 @@ import com.hei.app.employe.Category;
 import com.hei.app.employe.CategoryType;
 import com.hei.app.employe.Employee;
 
-public class ScoringTest {
+public class PointingTest {
 
     @Test
     void valid_salary_working_hour_without_HM() {
@@ -47,13 +47,13 @@ public class ScoringTest {
             listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
         }
 
-        var scoringRakotoMay = new Scoring(rakoto, calandarMay, listAttendanceMay);
-        var scoringRakotoJune = new Scoring(rakoto, calandarJune, listAttendanceJune);
-        var scoringRakotoJuly = new Scoring(rakoto, calandarJuly, listAttendanceJuly);
+        var pointingRakotoMay = new Pointing(rakoto, calandarMay, listAttendanceMay);
+        var pointingRakotoJune = new Pointing(rakoto, calandarJune, listAttendanceJune);
+        var pointingRakotoJuly = new Pointing(rakoto, calandarJuly, listAttendanceJuly);
 
-        scoringRakotoMay.calculAfterScoring();
-        scoringRakotoJune.calculAfterScoring();
-        scoringRakotoJuly.calculAfterScoring();
+        pointingRakotoMay.calculAfterPointing();
+        pointingRakotoJune.calculAfterPointing();
+        pointingRakotoJuly.calculAfterPointing();
         
         assertEquals(rounded(420 * 1_428.571), rounded(rakoto.getSalary().getBrute()));
     }
@@ -89,13 +89,13 @@ public class ScoringTest {
             listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
         }
 
-        var scoringRabeMay = new Scoring(rabe, calandarMay, listAttendanceMay);
-        var scoringRabeJune = new Scoring(rabe, calandarJune, listAttendanceJune);
-        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAttendanceJuly);
+        var pointingRabeMay = new Pointing(rabe, calandarMay, listAttendanceMay);
+        var pointingRabeJune = new Pointing(rabe, calandarJune, listAttendanceJune);
+        var pointingRabeJuly = new Pointing(rabe, calandarJuly, listAttendanceJuly);
 
-        scoringRabeMay.calculAfterScoring();
-        scoringRabeJune.calculAfterScoring();
-        scoringRabeJuly.calculAfterScoring();
+        pointingRabeMay.calculAfterPointing();
+        pointingRabeJune.calculAfterPointing();
+        pointingRabeJuly.calculAfterPointing();
         
         assertEquals(rounded(588 * 1_326.530) , rounded(rabe.getSalary().getBrute()));
     }
@@ -131,13 +131,13 @@ public class ScoringTest {
             listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
         }
 
-        var scoringRakotoMay = new Scoring(rakoto, calandarMay, listAttendanceMay);
-        var scoringRakotoJune = new Scoring(rakoto, calandarJune, listAttendanceJune);
-        var scoringRakotoJuly = new Scoring(rakoto, calandarJuly, listAttendanceJuly);
+        var pointingRakotoMay = new Pointing(rakoto, calandarMay, listAttendanceMay);
+        var pointingRakotoJune = new Pointing(rakoto, calandarJune, listAttendanceJune);
+        var pointingRakotoJuly = new Pointing(rakoto, calandarJuly, listAttendanceJuly);
 
-        scoringRakotoMay.calculAfterScoring();
-        scoringRakotoJune.calculAfterScoring();
-        scoringRakotoJuly.calculAfterScoring();
+        pointingRakotoMay.calculAfterPointing();
+        pointingRakotoJune.calculAfterPointing();
+        pointingRakotoJuly.calculAfterPointing();
         
         /** This test for 30% of HM */
         // assertEquals(rounded(612_856.959), rounded(rakoto.getSalary().getBrute()));
@@ -177,13 +177,13 @@ public class ScoringTest {
             listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
         }
 
-        var scoringRabeMay = new Scoring(rabe, calandarMay, listAttendanceMay);
-        var scoringRabeJune = new Scoring(rabe, calandarJune, listAttendanceJune);
-        var scoringRabeJuly = new Scoring(rabe, calandarJuly, listAttendanceJuly);
+        var pointingRabeMay = new Pointing(rabe, calandarMay, listAttendanceMay);
+        var pointingRabeJune = new Pointing(rabe, calandarJune, listAttendanceJune);
+        var pointingRabeJuly = new Pointing(rabe, calandarJuly, listAttendanceJuly);
 
-        scoringRabeMay.calculAfterScoring();
-        scoringRabeJune.calculAfterScoring();
-        scoringRabeJuly.calculAfterScoring();
+        pointingRabeMay.calculAfterPointing();
+        pointingRabeJune.calculAfterPointing();
+        pointingRabeJuly.calculAfterPointing();
         
         /** This test for 30% of HM */
         // assertEquals(rounded(796_713.92), rounded(rabe.getSalary().getBrute()));
@@ -193,7 +193,7 @@ public class ScoringTest {
     }
 
     @Test
-    void scoring_without_overtime_work() {
+    void pointing_without_overtime_work() {
         var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
 
         var gardien = new Category(CategoryType.guardian, 70, 100_000);
@@ -206,7 +206,7 @@ public class ScoringTest {
             gardien
         );
 
-        var scoring_rakoto = new Scoring(
+        var pointing_rakoto = new Pointing(
             rakoto,
             calandar_juin,
             List.of(
@@ -220,12 +220,12 @@ public class ScoringTest {
             )
         );
 
-        scoring_rakoto.calculAfterScoring();
+        pointing_rakoto.calculAfterPointing();
         assertEquals(rakoto.getSalary().getNet(), 80_000.0);
     }
 
     @Test
-    void scoring_with_overtime_work() {
+    void pointing_with_overtime_work() {
         var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
 
         var gardien = new Category(CategoryType.guardian, 70, 110_000);
@@ -238,7 +238,7 @@ public class ScoringTest {
             gardien
         );
 
-        var scoring_rakoto = new Scoring(
+        var pointing_rakoto = new Pointing(
             rakoto,
             calandar_juin,
             List.of(
@@ -252,12 +252,12 @@ public class ScoringTest {
             )
         );
 
-        scoring_rakoto.calculAfterScoring();
+        pointing_rakoto.calculAfterPointing();
         assertTrue(rakoto.getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
 
     @Test
-    void scoring_with_holiday_work() {
+    void pointing_with_holiday_work() {
         var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
 
         var gardien = new Category(CategoryType.guardian, 70, 110_000);
@@ -270,7 +270,7 @@ public class ScoringTest {
             gardien
         );
 
-        var scoring_rakoto = new Scoring(
+        var pointing_rakoto = new Pointing(
             rakoto,
             calandar_juin,
             List.of(
@@ -284,12 +284,12 @@ public class ScoringTest {
             )
         );
 
-        scoring_rakoto.calculAfterScoring();
+        pointing_rakoto.calculAfterPointing();
         assertTrue(rakoto.getSalary().getNet() > gardien.getSalaryMatche() * 0.8);
     }
 
     @Test
-    void scoring_with_night_work() {
+    void pointing_with_night_work() {
         var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
 
         var gardien = new Category(CategoryType.guardian, 98, 110_000);
@@ -302,7 +302,7 @@ public class ScoringTest {
             gardien
         );
 
-        var scoring_rabe = new Scoring(
+        var pointing_rabe = new Pointing(
             rabe,
             calandar_juin,
             List.of(
@@ -316,7 +316,7 @@ public class ScoringTest {
             )
         );
 
-        scoring_rabe.calculAfterScoring();
+        pointing_rabe.calculAfterPointing();
         assertTrue(rabe.getSalary().getBrute() > gardien.getSalaryMatche() * 1.2);
     }
 

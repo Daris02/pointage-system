@@ -1,4 +1,4 @@
-package com.hei.app.scoring;
+package com.hei.app.pointing;
 
 import java.time.Duration;
 import java.time.LocalTime;
