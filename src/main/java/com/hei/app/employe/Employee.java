@@ -27,35 +27,16 @@ public class Employee {
         this.salary  = new Salary(0);
     }
 
-    public void updateSalary(int hours) {
-        salary.setBrute(salaryPerHour() * hours);
-    }
-
     public double addOverTime(int hours) {
         double salaryHoursSupp = 0;
-        if (hours <= 8) salaryHoursSupp += salaryPerHour() * 0.3 * hours;
+        if (hours <= 8) salaryHoursSupp += salaryPerHour() * 1.3 * hours;
         
         int lastOverTime = hours - 8;
-        if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 0.5 * lastOverTime;
+        if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 1.5 * lastOverTime;
         return salaryHoursSupp;
     }
-    
-    public void addNightOverTime(int hours) {
-        double salaryHoursSupp = salaryPerHour() * 0.3 * hours;
-        salary.setBrute(salary.getBrute() + salaryHoursSupp);
-    }
 
-    public void additionalSunday(int hours) {
-        double salaryHoursSupp = salaryPerHour() * 0.4 * hours;
-        salary.setBrute(salary.getBrute() + salaryHoursSupp);
-    }
-
-    public void additionalHolidays(int hours) {
-        double salaryHoursSupp = salaryPerHour() * 0.5 * hours;
-        salary.setBrute(salary.getBrute() + salaryHoursSupp);
-    }
-
-    private double salaryPerHour() {
+    public double salaryPerHour() {
         return category.getSalaryMatche()/ category.getWorkTime();
     }
 }

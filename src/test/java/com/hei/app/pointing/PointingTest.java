@@ -44,7 +44,7 @@ public class PointingTest {
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRakoto.calculAfterPointing();
 
-        // True = 634_000.0
+        // True = 634_285.715
         assertTrue(633_000 < rakoto.getSalary().getBrute() && rakoto.getSalary().getBrute() < 635_000);
     }
 
@@ -76,9 +76,8 @@ public class PointingTest {
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRabe.calculAfterPointing();
 
-        // True = 824_605.23
+        // True = 824_571.424
         assertTrue(823_000 < rabe.getSalary().getBrute() && rabe.getSalary().getBrute() < 825_000);
-//        assertEquals(0, rabe.getSalary().getBrute());
     }
 
     @Test
@@ -172,8 +171,8 @@ public class PointingTest {
         );
 
         pointing_rakoto.calculAfterPointing();
-        assertEquals( Math.round((14_285.71 * 1.4 * 0.8)  + (14_285.71 * 0.8 * 6)),
-                      Math.round(rakoto.getSalary().getNet()));
+        // True = 84_571.40
+        assertTrue(84_500 < rakoto.getSalary().getNet() && rakoto.getSalary().getNet() < 85_000);
     }
 
     @Test

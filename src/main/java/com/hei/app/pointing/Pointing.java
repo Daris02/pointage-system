@@ -26,6 +26,7 @@ public class Pointing {
     private int nightOverTime = 0;
     private int additionalSunday = 0;
     private double sumOfSalaryInOverTime = 0.0;
+    private double sumOfHM = 0.0;
     
     public Pointing(Employee employee, List<SpecialCalendar> calendars, List<Set<Attendance>> allAttendances) {
         this.employee = employee;
@@ -35,11 +36,7 @@ public class Pointing {
 
     public void calculAfterPointing() {
         for (int i = 0; i < calendars.size(); i++) calculAfterPointingMonth(calendars.get(i), allAttendances.get(i));
-        employee.updateSalary(workHours);
-        employee.addNightOverTime(nightOverTime);
-        employee.additionalSunday(additionalSunday);
-        employee.additionalHolidays(additionalHolidays);
-        employee.getSalary().setBrute(employee.getSalary().getBrute() + sumOfSalaryInOverTime);
+        employee.getSalary().setBrute(sumOfSalaryInOverTime + sumOfHM);
     }
 
     public void calculAfterPointingMonth(SpecialCalendar calendar, Set<Attendance> attendances) {
@@ -68,9 +65,21 @@ public class Pointing {
                     workHours += workHourInDay;
                     if (workHourInDay > defaultWorkHourPerDay && employee.getCategory().getName() != CategoryType.senior)
                         overTimeInWeek += (workHourInDay - defaultWorkHourPerDay);
-                    if (attendance.containsNightHours()) nightOverTime += attendance.getNightWorkHours();
-                    if (day.isHoliday()) additionalHolidays += workHourInDay;
-                    if (day.name().equals("Sunday")) additionalSunday += workHourInDay;
+
+                    List<Double> listOfHM = new ArrayList<>();
+                    if (attendance.containsNightHours()) {
+                        nightOverTime += attendance.getNightWorkHours();
+                        listOfHM.add(1.3);
+                    } else if (!attendance.containsNightHours()) { listOfHM.add(1.0); }
+                    if (day.name().equals("Sunday")) {
+                        additionalSunday += workHourInDay;
+                        listOfHM.add(1.4);
+                    } else if (!day.name().equals("Sunday")) { listOfHM.add(1.0); }
+                    if (day.isHoliday()) {
+                        additionalHolidays += workHourInDay;
+                        listOfHM.add(1.5);
+                    } else if (!day.isHoliday()) { listOfHM.add(1.0); }
+                    sumOfHM += employee.salaryPerHour() * workHourInDay * listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2);
                 }
             }
         }
