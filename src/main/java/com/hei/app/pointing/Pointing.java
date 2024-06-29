@@ -25,7 +25,7 @@ public class Pointing {
     private int additionalHolidays = 0;
     private int nightOverTime = 0;
     private int additionalSunday = 0;
-    private double sumOfSalaryInOverTime = 0.0;
+    private double sumOfHS = 0.0;
     private double sumOfHM = 0.0;
     
     public Pointing(Employee employee, List<SpecialCalendar> calendars, List<Set<Attendance>> allAttendances) {
@@ -36,7 +36,7 @@ public class Pointing {
 
     public void calculAfterPointing() {
         for (int i = 0; i < calendars.size(); i++) calculAfterPointingMonth(calendars.get(i), allAttendances.get(i));
-        employee.getSalary().setBrute(sumOfSalaryInOverTime + sumOfHM);
+        employee.getSalary().setBrute(sumOfHS + sumOfHM);
     }
 
     public void calculAfterPointingMonth(SpecialCalendar calendar, Set<Attendance> attendances) {
@@ -56,15 +56,26 @@ public class Pointing {
     }
 
     private void calculAfterPointingInWeek(List<Day> calendar, Set<Attendance> attendances) {
-        int overTimeInWeek = 0;
+        List<Day> checkDays = new ArrayList<>();
         for (Day day : calendar) {
             for (Attendance attendance : attendances) {
                 if (day.value() == attendance.getDay()) {
                     int workHourInDay = attendance.getWorkHours();
                     int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/ 7;
+                    int overTimeInDay = 0;
                     workHours += workHourInDay;
-                    if (workHourInDay > defaultWorkHourPerDay && employee.getCategory().getName() != CategoryType.senior)
-                        overTimeInWeek += (workHourInDay - defaultWorkHourPerDay);
+
+                    if (checkDays.contains(day)) {
+                        overTimeInDay += workHourInDay;
+                        if (attendance.containsNightHours()) overTimeInDay += attendance.getNightWorkHours();
+                        overTime += overTimeInDay;
+                    }
+                    else if (!checkDays.contains(day) && workHourInDay > defaultWorkHourPerDay && employee.getCategory().getName() != CategoryType.senior) {
+                        if (attendance.containsNightHours()) overTimeInDay += attendance.getNightWorkHours();
+                        else overTimeInDay += (workHourInDay - defaultWorkHourPerDay);
+                        overTime += overTimeInDay;
+                    }
+                    checkDays.add(day);
 
                     List<Double> listOfHM = new ArrayList<>();
                     if (attendance.containsNightHours()) {
@@ -79,12 +90,11 @@ public class Pointing {
                         additionalHolidays += workHourInDay;
                         listOfHM.add(1.5);
                     } else if (!day.isHoliday()) { listOfHM.add(1.0); }
-                    sumOfHM += employee.salaryPerHour() * workHourInDay * listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2);
+                    sumOfHS += employee.addOverTime(overTimeInDay, (listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2)));
+                    // Fix: HM - HS
+                    sumOfHM += employee.salaryPerHour() * (workHourInDay-overTimeInDay) * listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2);
                 }
             }
         }
-        overTime += overTimeInWeek;
-        if (overTimeInWeek > 20) overTimeInWeek = 20;
-        sumOfSalaryInOverTime += employee.addOverTime(overTimeInWeek);
     }
 }

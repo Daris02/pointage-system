@@ -27,13 +27,11 @@ public class Employee {
         this.salary  = new Salary(0);
     }
 
-    public double addOverTime(int hours) {
-        double salaryHoursSupp = 0;
-        if (hours <= 8) salaryHoursSupp += salaryPerHour() * 1.3 * hours;
-        
+    public double addOverTime(int hours, double HM) {
         int lastOverTime = hours - 8;
-        if (lastOverTime >= 0) salaryHoursSupp += salaryPerHour() * 1.5 * lastOverTime;
-        return salaryHoursSupp;
+        if (lastOverTime > 0) return  salaryPerHour() * 1.3 * 8 * HM
+                                    + salaryPerHour() * 1.5 * lastOverTime * HM;
+        else return salaryPerHour() * 1.3 * hours * HM;
     }
 
     public double salaryPerHour() {
