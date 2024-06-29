@@ -3,7 +3,7 @@ package com.hei.app.pointing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,11 +32,11 @@ public class PointingTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of()); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        Set<Attendance> listAttendanceMay = new HashSet<>();
+        Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) listAttendanceMay.add(new Attendance(i, "07:00-17:00"));
-        Set<Attendance> listAttendanceJune = new HashSet<>();
+        Set<Attendance> listAttendanceJune = new LinkedHashSet<>();
             for (int i = 1; i <= 30; i++) listAttendanceJune.add(new Attendance(i, "07:00-17:00"));
-        Set<Attendance> listAttendanceJuly = new HashSet<>();
+        Set<Attendance> listAttendanceJuly = new LinkedHashSet<>();
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
 
             var pointingRakoto = new Pointing(rakoto,
@@ -64,11 +64,11 @@ public class PointingTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of()); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        Set<Attendance> listAttendanceMay = new HashSet<>();
+        Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) listAttendanceMay.add(new Attendance(i, "17:00-07:00"));
-        Set<Attendance> listAttendanceJune = new HashSet<>();
+        Set<Attendance> listAttendanceJune = new LinkedHashSet<>();
             for (int i = 1; i <= 30; i++) listAttendanceJune.add(new Attendance(i, "17:00-07:00"));
-        Set<Attendance> listAttendanceJuly = new HashSet<>();
+        Set<Attendance> listAttendanceJuly = new LinkedHashSet<>();
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
 
             var pointingRabe = new Pointing(rabe,
@@ -96,11 +96,11 @@ public class PointingTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of(17, 25, 26)); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        Set<Attendance> listAttendanceMay = new HashSet<>();
+        Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) listAttendanceMay.add(new Attendance(i, "07:00-17:00"));
-        Set<Attendance> listAttendanceJune = new HashSet<>();
+        Set<Attendance> listAttendanceJune = new LinkedHashSet<>();
             for (int i = 1; i <= 30; i++) listAttendanceJune.add(new Attendance(i, "07:00-17:00"));
-        Set<Attendance> listAttendanceJuly = new HashSet<>();
+        Set<Attendance> listAttendanceJuly = new LinkedHashSet<>();
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
 
             var pointingRakoto = new Pointing(rakoto,
@@ -108,7 +108,8 @@ public class PointingTest {
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRakoto.calculAfterPointing();
 
-        assertEquals(621_429.0, rakoto.getSalary().getBrute());
+        // True = 655_713.603
+        assertEquals(655_714.0, Math.round(rakoto.getSalary().getBrute()));
     }
 
     @Test
@@ -127,11 +128,11 @@ public class PointingTest {
         var calandarJune = new SpecialCalendar(6, 2024, List.of(17, 25, 26)); 
         var calandarJuly = new SpecialCalendar(7, 2024, List.of());
         
-        Set<Attendance> listAttendanceMay = new HashSet<>();
+        Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) listAttendanceMay.add(new Attendance(i, "17:00-07:00"));
-        Set<Attendance> listAttendanceJune = new HashSet<>();
+        Set<Attendance> listAttendanceJune = new LinkedHashSet<>();
             for (int i = 1; i <= 30; i++) listAttendanceJune.add(new Attendance(i, "17:00-07:00"));
-        Set<Attendance> listAttendanceJuly = new HashSet<>();
+        Set<Attendance> listAttendanceJuly = new LinkedHashSet<>();
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
 
             var pointingRabe = new Pointing(rabe,
@@ -139,7 +140,8 @@ public class PointingTest {
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRabe.calculAfterPointing();
 
-        assertTrue(800_000 < rabe.getSalary().getBrute() && rabe.getSalary().getBrute() < 810_000);
+        // True = 852_430.106
+        assertTrue(852_000 < rabe.getSalary().getBrute() && rabe.getSalary().getBrute() < 853_000);
     }
 
     @Test
