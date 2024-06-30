@@ -63,11 +63,10 @@ public class Pointing {
                     int workHourInDay = attendance.getWorkHours();
                     int defaultWorkHourPerDay = employee.getCategory().getWorkTime()/ 7;
                     int overTimeInDay = 0;
-                    workHours += workHourInDay;
 
                     if (checkDays.contains(day)) {
-                        overTimeInDay += workHourInDay;
                         if (attendance.containsNightHours()) overTimeInDay += attendance.getNightWorkHours();
+                        else overTimeInDay += workHourInDay;
                         overTime += overTimeInDay;
                     }
                     else if (!checkDays.contains(day) && workHourInDay > defaultWorkHourPerDay && employee.getCategory().getName() != CategoryType.senior) {
@@ -90,9 +89,10 @@ public class Pointing {
                         additionalHolidays += workHourInDay;
                         listOfHM.add(1.5);
                     } else if (!day.isHoliday()) { listOfHM.add(1.0); }
+                    workHourInDay -= overTimeInDay;
+                    workHours += workHourInDay;
                     sumOfHS += employee.addOverTime(overTimeInDay, (listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2)));
-                    // Fix: HM - HS
-                    sumOfHM += employee.salaryPerHour() * (workHourInDay-overTimeInDay) * listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2);
+                    sumOfHM += employee.salaryPerHour() * workHourInDay * listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2);
                 }
             }
         }

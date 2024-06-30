@@ -83,6 +83,7 @@ public class EmployeTest {
         assertEquals(588, pointingRabe.getWorkHours());
         assertEquals(0, pointingRabe.getOverTime());
 
+        // True = 833_000.0
         assertTrue(832_000 < rabe.getSalary().getBrute() && rabe.getSalary().getBrute() < 834_000);
         assertTrue(832_000 * 0.8 < rabe.getSalary().getNet() && rabe.getSalary().getNet() < 834_000 * 0.8);
     }
@@ -121,7 +122,6 @@ public class EmployeTest {
         pointingRakoto.calculAfterPointing();
 
         // True = 872_007.414
-        // assertEquals(872_007.414, rakoto.getSalary().getBrute());
         assertTrue( 872_000 < rakoto.getSalary().getBrute() && rakoto.getSalary().getBrute() < 873_000);
         assertTrue(872_000 * 0.8 < rakoto.getSalary().getNet() && rakoto.getSalary().getNet() < 873_000 * 0.8);
     }
