@@ -68,8 +68,7 @@ public class Pointing {
                         if (attendance.containsNightHours()) overTimeInDay += attendance.getNightWorkHours();
                         else overTimeInDay += workHourInDay;
                         overTime += overTimeInDay;
-                    }
-                    else if (!checkDays.contains(day) && workHourInDay > defaultWorkHourPerDay && employee.getCategory().getName() != CategoryType.senior) {
+                    } else if (!checkDays.contains(day) && workHourInDay > defaultWorkHourPerDay && employee.getCategory().getName() != CategoryType.senior) {
                         if (attendance.containsNightHours()) overTimeInDay += attendance.getNightWorkHours();
                         else overTimeInDay += (workHourInDay - defaultWorkHourPerDay);
                         overTime += overTimeInDay;
@@ -80,19 +79,19 @@ public class Pointing {
                     if (attendance.containsNightHours()) {
                         nightOverTime += attendance.getNightWorkHours();
                         listOfHM.add(1.3);
-                    } else if (!attendance.containsNightHours()) { listOfHM.add(1.0); }
+                    } else { listOfHM.add(1.0); }
                     if (day.name().equals("Sunday")) {
                         additionalSunday += workHourInDay;
                         listOfHM.add(1.4);
-                    } else if (!day.name().equals("Sunday")) { listOfHM.add(1.0); }
+                    } else { listOfHM.add(1.0); }
                     if (day.isHoliday()) {
                         additionalHolidays += workHourInDay;
                         listOfHM.add(1.5);
-                    } else if (!day.isHoliday()) { listOfHM.add(1.0); }
+                    } else { listOfHM.add(1.0); }
                     workHourInDay -= overTimeInDay;
                     workHours += workHourInDay;
                     sumOfHS += employee.addOverTime(overTimeInDay, (listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2)));
-                    sumOfHM += employee.salaryPerHour() * workHourInDay * listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2);
+                    sumOfHM += employee.addIncreasedTime(workHourInDay, (listOfHM.get(0) * listOfHM.get(1) * listOfHM.get(2)));
                 }
             }
         }

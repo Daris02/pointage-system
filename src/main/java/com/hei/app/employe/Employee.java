@@ -29,12 +29,15 @@ public class Employee {
 
     public double addOverTime(int hours, double HM) {
         int lastOverTime = hours - 8;
-        if (lastOverTime > 0) return  salaryPerHour() * 1.3 * 8 * HM
-                                    + salaryPerHour() * 1.5 * lastOverTime * HM;
+        if (lastOverTime > 0) return  salaryPerHour() * 1.3 * 8 * HM + salaryPerHour() * 1.5 * lastOverTime * HM;
         else return salaryPerHour() * 1.3 * hours * HM;
     }
 
-    public double salaryPerHour() {
+    public double addIncreasedTime(int hours, double HM) {
+        return salaryPerHour() * hours * HM;
+    }
+
+    private double salaryPerHour() {
         return category.getSalaryMatche()/ category.getWorkTime();
     }
 }
