@@ -11,13 +11,13 @@ public class SpecialCalendarTest {
 
     @Test
     void jour_ferier() {
-        var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
-        assertTrue(calandar_juin.getDays().get(17 -1).isHoliday());
+        var calendar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
+        assertTrue(calendar_juin.getDays().get(17 -1).isHoliday());
     }
 
     @Test
     void jour_non_ferier() {
-        var calandar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
-        assertFalse(calandar_juin.getDays().get(18 -1).isHoliday());
+        var calendar_juin = new SpecialCalendar(6, 2024, List.of(17, 25, 26));
+        assertFalse(calendar_juin.getDays().get(18 -1).isHoliday());
     }
 }

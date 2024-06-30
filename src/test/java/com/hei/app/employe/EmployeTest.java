@@ -27,9 +27,9 @@ public class EmployeTest {
             gardien
         );
 
-        var calandarMay = new SpecialCalendar(5, 2024, List.of());
-        var calandarJune = new SpecialCalendar(6, 2024, List.of(26));
-        var calandarJuly = new SpecialCalendar(7, 2024, List.of());
+        var calendarMay = new SpecialCalendar(5, 2024, List.of());
+        var calendarJune = new SpecialCalendar(6, 2024, List.of(26));
+        var calendarJuly = new SpecialCalendar(7, 2024, List.of());
         
         Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) listAttendanceMay.add(new Attendance(i, "07:00-17:00"));
@@ -39,7 +39,7 @@ public class EmployeTest {
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
 
         var pointingRakoto = new Pointing(rakoto,
-                List.of(calandarMay, calandarJune, calandarJuly),
+                List.of(calendarMay, calendarJune, calendarJuly),
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRakoto.calculAfterPointing();
 
@@ -64,9 +64,9 @@ public class EmployeTest {
                 gardien
         );
 
-        var calandarMay = new SpecialCalendar(5, 2024, List.of());
-        var calandarJune = new SpecialCalendar(6, 2024, List.of(26));
-        var calandarJuly = new SpecialCalendar(7, 2024, List.of());
+        var calendarMay = new SpecialCalendar(5, 2024, List.of());
+        var calendarJune = new SpecialCalendar(6, 2024, List.of(26));
+        var calendarJuly = new SpecialCalendar(7, 2024, List.of());
 
         Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) listAttendanceMay.add(new Attendance(i, "17:00-07:00"));
@@ -76,7 +76,7 @@ public class EmployeTest {
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "17:00-07:00"));
 
         var pointingRabe = new Pointing(rabe,
-                List.of(calandarMay, calandarJune, calandarJuly),
+                List.of(calendarMay, calendarJune, calendarJuly),
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRabe.calculAfterPointing();
 
@@ -100,9 +100,9 @@ public class EmployeTest {
                 gardien
         );
 
-        var calandarMay = new SpecialCalendar(5, 2024, List.of());
-        var calandarJune = new SpecialCalendar(6, 2024, List.of(26));
-        var calandarJuly = new SpecialCalendar(7, 2024, List.of());
+        var calendarMay = new SpecialCalendar(5, 2024, List.of());
+        var calendarJune = new SpecialCalendar(6, 2024, List.of(26));
+        var calendarJuly = new SpecialCalendar(7, 2024, List.of());
 
         Set<Attendance> listAttendanceMay = new LinkedHashSet<>();
             for (int i = 26; i <= 31; i++) {
@@ -117,7 +117,7 @@ public class EmployeTest {
             for (int i = 1; i <= 6; i++) listAttendanceJuly.add(new Attendance(i, "07:00-17:00"));
 
         var pointingRakoto = new Pointing(rakoto,
-                List.of(calandarMay, calandarJune, calandarJuly),
+                List.of(calendarMay, calendarJune, calendarJuly),
                 List.of(listAttendanceMay, listAttendanceJune, listAttendanceJuly));
         pointingRakoto.calculAfterPointing();
 
