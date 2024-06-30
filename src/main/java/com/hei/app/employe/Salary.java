@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class Salary {
-    private double net;
     private double brute;
 
     public Salary(double brute) {
